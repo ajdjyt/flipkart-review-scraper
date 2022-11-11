@@ -1,37 +1,39 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
+from func import seleniumrun,clean
 import emoji,csv
-def clean(string):
-    return emoji.replace_emoji(string, replace='').strip()
-#from selenium.webdriver.common.keys import keys
-link="https://www.flipkart.com/hp-ink-tank-wireless-415-all-one-multi-function-wifi-color-printer-voice-activated-printing-google-assistant-alexa-color-page-cost-20-paise-black-10-paise/product-reviews/itm3d317b6a651a2?pid=PRNF6M6F8V9BPNQ5&lid=LSTPRNF6M6F8V9BPNQ59PCYJM&marketplace=FLIPKART"
+output=[]
+try:
+    pages=int(input("How many pages: "))
+    lk=input("Link: ")
+except:
+    print("Enter whole numbers for number of pages and enter links without any escape characters.")
+    quit()
+lk=lk.split("/")
+if lk[2]!='www.flipkart.com':
+    print("Enter only links from flipkart")
+    quit()
+out=''
 driver=webdriver.Chrome()
-pages=1
-driver.get(link)
-pgtitle=driver.title
-pgtitle=pgtitle[:pgtitle.find(":")]
-print(pgtitle)
-nreadmores=driver.find_elements(By.CLASS_NAME,'_1BWGvX')
-for page in range(pages):
-    for i in range(len(nreadmores)):
-        nreadmores[i].click()
-    reviews=[]
-    reviewbodies=driver.find_elements(By.CLASS_NAME,'t-ZTKy')
-    reviewheadings=driver.find_elements(By.CLASS_NAME,'_2-N8zT')
-    reviewratings=driver.find_elements(By.CSS_SELECTOR,'._3LWZlK._1BLPMq')
-    for i in range(10):
-        body=clean(reviewbodies[i].text)
-        heading=clean(reviewheadings[i].text)
-        rating=clean(reviewratings[i].text)
-        reviews.append([rating,heading,body])
-    #sleep(10)
-with open(pgtitle+".csv","w") as csvfile:
-    writer=csv.writer(csvfile)
-    writer.writerows(reviews)
-    csvfile.close()
-with open(pgtitle+".csv","r") as csvfile:
-    reader=csv.reader(csvfile)
-    for i in reader:
-        print(i)
+for i in range(1,5):
+    out=out+lk[i]+"/"
+out+=lk[5].split("&marketplace")[0]
+out+="&marketplace=FLIPKART&page=1"
+out="https:"+out
+out=out.replace("/p/","/product-reviews/")
+for i in range(1,pages+1):
+    out=out[:-1]
+    out+=str(i)
+    selout=seleniumrun(driver,out)
+    for i in selout[0]:
+        output.append(i)
 driver.quit()
+with open(selout[1]+".csv","w",newline='') as csvfile:
+    writer=csv.writer(csvfile)
+    writer.writerows(output)
+    csvfile.close()
+read=input("Read csv data? ")
+if read.lower() in ["y","yes"]:
+    with open(selout[1]+".csv","r") as csvfile:
+        reader=csv.reader(csvfile)
+        for i in reader: print(i)
