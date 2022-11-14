@@ -25,3 +25,5 @@ The only accepted special characters are:
 ```
 The csv is formatted as [rating,heading,body]. If you find that the heading or body is empty,  
 its probably because they contained only special characters outside of the above mentioned  
+
+Also checkout my image-rescaler project at this [link](https://github.com/ajdjyt/image-rescaler)  
