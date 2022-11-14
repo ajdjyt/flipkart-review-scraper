@@ -15,7 +15,7 @@ If you do not have any chrome based browser installed i recommend [Ungoogled Chr
 Place main.py and func.py in the same directory  
 run by  
 ```
-python.exe main.py  
+python main.py  
 ```
 ## Output:  
 Output is in the format of a csv with the name of the website url, all newline characters,emojis are removed.  

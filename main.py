@@ -9,21 +9,26 @@ try:
 except:
     print("Enter whole numbers for number of pages and enter links without any escape characters.")
     quit()
-lk=lk.split("/")
-if lk[2]!='www.flipkart.com':
+
+o=lk.split("/")
+if o[2]!='www.flipkart.com':
     print("Enter only links from flipkart")
     quit()
-out=''
 driver=webdriver.Chrome()
+driver.get(lk)
+allreviews=driver.find_element(By.CSS_SELECTOR,'._3UAT2v._16PBlm')
+allreviews.click()
+'''
 for i in range(1,5):
     out=out+lk[i]+"/"
 out+=lk[5].split("&marketplace")[0]
 out+="&marketplace=FLIPKART&page=1"
 out="https:"+out
 out=out.replace("/p/","/product-reviews/")
+'''
 for i in range(1,pages+1):
-    out=out[:-1]
-    out+=str(i)
+    out=driver.current_url
+    out+="?page="+str(i)
     selout=seleniumrun(driver,out)
     for i in selout[0]:
         output.append(i)
