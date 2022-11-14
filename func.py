@@ -18,7 +18,7 @@ def seleniumrun(driver,link):
     reviewbodies=driver.find_elements(By.CLASS_NAME,'t-ZTKy')
     reviewheadings=driver.find_elements(By.CLASS_NAME,'_2-N8zT')
     reviewratings=driver.find_elements(By.CSS_SELECTOR,'._3LWZlK._1BLPMq')
-    for i in range(10):
+    for i in range(len(reviewbodies)):
         body=clean(reviewbodies[i].text)
         heading=clean(reviewheadings[i].text)
         rating=clean(reviewratings[i].text)

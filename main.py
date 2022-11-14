@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from func import seleniumrun,clean
-import emoji,csv
+import emoji,csv,selenium
 output=[]
 try:
     pages=int(input("How many pages: "))
@@ -16,8 +16,12 @@ if o[2]!='www.flipkart.com':
     quit()
 driver=webdriver.Chrome()
 driver.get(lk)
-allreviews=driver.find_element(By.CSS_SELECTOR,'._3UAT2v._16PBlm')
-allreviews.click()
+try:
+    allreviews=driver.find_element(By.CSS_SELECTOR,'._3UAT2v._16PBlm')
+    allreviews.click()
+except selenium.common.exceptions.NoSuchElementException:
+    print("Product has no reviews")
+    quit()
 '''
 for i in range(1,5):
     out=out+lk[i]+"/"
