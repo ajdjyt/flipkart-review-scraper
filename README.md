@@ -2,15 +2,19 @@
 Scrapes the reviews of the given flipkart products link.  
 ## Dependencies:    
 ```
-selenium,emoji  
+selenium,emoji,rich
 ```
 Install these via  
 ```
-python -m pip install -U selenium emoji  
+python -m pip install -U selenium emoji rich  
 ```
-Also for selenium the Chrome driver is used. To setup the Chrome driver for your platform follow this [link](https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/ ).
-Any Chromium based browser should work Edge,Google Chrome etc. 
-If you do not have any chrome based browser installed i recommend [Ungoogled Chromium](https://ungoogled-software.github.io/ungoogled-chromium-binaries/) [(Github)](https://github.com/ungoogled-software/ungoogled-chromium).
+Or  
+```
+python -m pip install -r requirements.txt  
+```  
+Also for selenium the Chrome driver is used. To setup the Chrome driver for your platform follow this [link](https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/ ).  
+Any Chromium based browser should work Edge,Google Chrome etc.  
+If you do not have any chrome based browser installed i recommend [Ungoogled Chromium](https://ungoogled-software.github.io/ungoogled-chromium-binaries/) [(Github)](https://github.com/  ungoogled-software/ungoogled-chromium).  
 ## Running:   
 Place main.py and func.py in the same directory  
 run by  
